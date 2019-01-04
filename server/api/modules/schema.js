@@ -1,14 +1,18 @@
 const mongoose=require('mongoose');
-const post_schema=mongoose.Schema({
-    isbn:String,
-    title:String,
-    subtitle:String,
-    author:String,
-    published:String,
-    publisher:String,
-    pages:Number,
-    description:String,
-    website:String,
+const books =mongoose.Schema({
+  _id: mongoose.Types.ObjectId,
+  isbn: { type: String },
+  title: { type: String },
+  subtitle: { type: String },
+  author: { type: String },
+  published: { type: Date },
+  publisher: { type: String },
+  pages: { type: Number },
+  description: { type: String },
+  website: { type: String },
 
-})
-module.exports=mongoose.model("post",post_schema)
+}, { collection : 'book' });
+
+ module.exports=mongoose.model("schema",books)
+
+
