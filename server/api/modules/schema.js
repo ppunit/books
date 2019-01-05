@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const books =mongoose.Schema({
   _id: mongoose.Types.ObjectId,
-  isbn: { type: String },
+  isbn: { type: String ,unique:true,required:true},
   title: { type: String },
   subtitle: { type: String },
   author: { type: String },
