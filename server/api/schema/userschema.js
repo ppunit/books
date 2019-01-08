@@ -3,11 +3,12 @@ const userSchema=mongoose.Schema({
     name:{
         required:true,
         unique:true,
-        type:String},
+        type:String,
+    index:true},
     
-    wantToRead:[{type:String,unique:true,required:true}],
-    reading:[{type:String,unique:true,required:true}],
-    read:[{type:String,unique:true,required:true}]
+    wantToRead:[{type:String,index:true,required:true}],
+    reading:[{type:String,index:true,required:true}],
+    read:[{type:String,index:true,required:true}]
 
 }, { collection : 'userdata' })
 
