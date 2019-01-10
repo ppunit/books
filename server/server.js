@@ -1,6 +1,7 @@
 const express = require("express");
 // const app = express();
 const joi = require('joi')
+const cors=require('cors');
 const mongoose = require('mongoose')
 const bodyparser = require("body-parser"); //to use json file we need bodyparser
 // var db = mongoose.connection;
@@ -17,13 +18,13 @@ const schema = require("./api/schema/bookschema")
 const user = require("./api/schema/userschema")
 
 //middleware
-
+app.use(cors());
 app.use(bodyparser.json()) //we are using a middleware for json file to  be used here
 //creating a middleware for existing user login
 
-app.use("/api/login", (req, res) => {
+app.post("/api/login", (req, res) => {
       var name = req.headers.username;
-      //console.log(req.headers.username);
+      console.log(name);
       const scheme = joi.string().min(3).max(20).required()
       joi.validate(name, scheme, (err, result) => {
 
@@ -37,13 +38,14 @@ app.use("/api/login", (req, res) => {
             })
             .then(result => {
                   if (result.length >= 1) {
-                        res.send(`${name} is present`);
+                       
+                        res.send(JSON.stringify("user is present"));
 
                   } else {
-                        res.send("There is no user with this name");
+                        res.send(JSON.stringify("There is no user with this name"));
                   }
             }).catch(err => {
-                  res.send('something went wrong');
+                  console.log(err);
             })
 
 })

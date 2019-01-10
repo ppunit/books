@@ -1,0 +1,179 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+}
+
+header {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 30px;
+  height: 5%;
+  background-color: slateblue;
+}
+
+input[type=text] {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 30%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+}
+
+
+
+#book {
+  position: relative;
+  background-color: rgb(252, 0, 126);
+  display: flex;
+  width: 600px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: lawngreen;
+
+}
+#book div {
+  display:flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+#book img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+
+}
+
+#book select {
+  position: relative;
+  width: 200px;
+  font-size: 20px;
+
+}
+
+
+#wantToRead {
+  position: relative;
+
+  
+  display: flex;
+  
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: lightcoral;
+
+}
+
+#wantToRead div {
+  display:flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+#wantToRead img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+
+}
+
+#wantToRead select {
+  position: relative;
+  width: 200px;
+  font-size: 20px;
+
+}
+
+.bookContainer {
+
+
+  position:relative;
+  display: flex;
+  background-color: lightblue;
+
+}
+
+#reading {
+  position: relative;
+
+  
+  display: flex;
+  
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: lightgrey;
+
+}
+
+#reading div {
+  display:flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+#reading img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+
+}
+
+#reading select {
+  position: relative;
+  width: 200px;
+  font-size: 20px;
+
+}
+
+
+#read {
+  position: relative;
+  display:flex;
+  background-color:lemonchiffon;
+
+}
+
+#read div {
+  display:flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+#read img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+
+}
+
+#read select {
+  position: relative;
+  width: 200px;
+  font-size: 20px;
+
+}

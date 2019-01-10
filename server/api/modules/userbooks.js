@@ -65,17 +65,17 @@ var postBooks = function (listType, username, isbn) {
                 [listType]: isbn
             }
         }).then(result => {
-           
+
             resolve(isbn);
-            
+
         })
     })
 }
 var deleteBooks = function (listType, username, isbn) {
 
-        return new Promise((resolve, reject) => {
-                // var list=listType;
-                console.log(`${isbn} is deleting in the list`)
+    return new Promise((resolve, reject) => {
+        // var list=listType;
+        console.log(`${isbn} is deleting in the list`)
         user.updateOne({
             "name": username
         }, {
@@ -85,61 +85,61 @@ var deleteBooks = function (listType, username, isbn) {
         }).then(() => {
             resolve(isbn);
         })
-                })
-        }
+    })
+}
 
 
 
-        router.get('/list/:listType', (req, res) => {
-            console.log(req.headers.username);
-            console.log(req.params.listType);
-            var listType = req.params.listType;
-            var username = req.headers.username;
-            getBooks(listType, username)
-                .then(result => res.send(result));
+router.get('/list/:listType', (req, res) => {
+    console.log(req.headers.username);
+    console.log(req.params.listType);
+    var listType = req.params.listType;
+    var username = req.headers.username;
+    getBooks(listType, username)
+        .then(result => res.send(result));
+})
+router.post('/list/:listType', (req, res) => {
+    console.log(req.headers.username);
+    console.log(req.params.listType);
+    var listType = req.params.listType;
+    var username = req.headers.username;
+    var isbn = req.body.isbn;
+    validStringOrNot(isbn)
+        .then(books => {
+            return validBookOrNot(books)
         })
-        router.post('/list/:listType', (req, res) => {
-            console.log(req.headers.username);
-            console.log(req.params.listType);
-            var listType = req.params.listType;
-            var username = req.headers.username;
-            var isbn = req.body.isbn;
-            validStringOrNot(isbn)
-                .then(books => {
-                    return validBookOrNot(books)
-                })
-                .then(result => {
-                    console.log("book is present");
-                    return postBooks(listType, username, isbn)
-
-                })
-                .then(result => {
-                    console.log(result);
-                    res.send(`${result} is added in the list`);
-
-                })
-                .catch(err => res.send(err));
+        .then(result => {
+            console.log("book is present");
+            return postBooks(listType, username, isbn)
 
         })
-        router.delete("/list/:listType", (req, res) => {
-            console.log(req.headers.username);
-            console.log(req.params.listType);
-            var listType = req.params.listType;
-            var username = req.headers.username;
-            var isbn = req.body.isbn;
-            validStringOrNot(isbn)
-                .then(books => {
-                    return validBookOrNot(books)
-                })
-                .then(result => {
-                    console.log("book is present");
-                    return deleteBooks(listType, username, isbn)
-                })
-                .then(result => {
-                    res.send(`${result} is deleted in the list`);
-
-                })
-                .catch(err => console.log(err));
+        .then(result => {
+            console.log(result);
+            res.send(`${result} is added in the list`);
 
         })
-        module.exports = router;
+        .catch(err => res.send(err));
+
+})
+router.delete("/list/:listType", (req, res) => {
+    console.log(req.headers.username);
+    console.log(req.params.listType);
+    var listType = req.params.listType;
+    var username = req.headers.username;
+    var isbn = req.body.isbn;
+    validStringOrNot(isbn)
+        .then(books => {
+            return validBookOrNot(books)
+        })
+        .then(result => {
+            console.log("book is present");
+            return deleteBooks(listType, username, isbn)
+        })
+        .then(result => {
+            res.send(`${result} is deleted in the list`);
+
+        })
+        .catch(err => console.log(err));
+
+})
+module.exports = router;

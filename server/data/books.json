@@ -8,7 +8,9 @@
         "publisher": "No Starch Press",
         "pages": 472,
         "description": "JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.",
-        "website": "http://eloquentjavascript.net/"
+        "website": "http://eloquentjavascript.net/",
+        "img":
+      
       },
       {
         "isbn": "9781449331818",
@@ -66,7 +68,7 @@
         "website": "https://github.com/getify/You-Dont-Know-JS/tree/master/es6%20&%20beyond"
       },
       {
-        "isbn": "9781449325862",
+        "isbn": "9781449325862", 
         "title": "Git Pocket Guide",
         "subtitle": "A Working Introduction",
         "author": "Richard E. Silverman",

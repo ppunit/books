@@ -28,7 +28,7 @@ router.post("/api/register", (req, res) => {
         })
         .then(result => {
             if (result.length >= 1)
-                res.send(`${name} already existing try with another name`);
+                res.send(JSON.stringify("already existing try with another name"));
             else {
                 var newuser = new user({
                     name: name,
@@ -37,8 +37,8 @@ router.post("/api/register", (req, res) => {
                     read: []
                 })
                 newuser.save(function (err, newuser) {
-                    if (err) return console.log("cannot add a user")
-                    res.send("new user added ");
+                    if (err) return console.log(JSON.stringify("cannot add a user"))
+                    res.send(JSON.stringify("new user added "));
                 })
             }
 
