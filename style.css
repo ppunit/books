@@ -102,14 +102,19 @@ button:hover {
 
 }
 
-#wantToRead select {
-  position: relative;
-  width: 200px;
-  font-size: 20px;
+#wantToRead div button {
+  position: realtive;
+  
+  width:200px;
+height:25px;
+  font-size: 15px;
+  padding:3px;
+  color:black;
+  background-color: white;
 
 }
 
-.bookContainer {
+#bookContainer {
 
 
   position:relative;
@@ -143,10 +148,15 @@ button:hover {
 
 }
 
-#reading select {
-  position: relative;
-  width: 200px;
-  font-size: 20px;
+#reading div button {
+  position: realtive;
+  
+  width:200px;
+height:25px;
+  font-size: 15px;
+  padding:3px;
+  color:black;
+  background-color: white;
 
 }
 
@@ -171,9 +181,14 @@ button:hover {
 
 }
 
-#read select {
-  position: relative;
-  width: 200px;
-  font-size: 20px;
+#read div button {
+  position: realtive;
+  
+  width:200px;
+height:25px;
+  font-size: 15px;
+  padding:3px;
+  color:black;
+  background-color: white;
 
 }

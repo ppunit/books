@@ -1,5 +1,6 @@
 var booksJsonObject = "";
 
+var username="";
 function getbooks() {
     var url = 'http://localhost:7777/books/api/bookstore';
 
@@ -22,24 +23,68 @@ function getbooks() {
             $.each(json, function (i, val) {
 
 
-                output += '<div><img src= "' + json[i].image + '" ><select id="post"><option id= "' + json[i].isbn + '" value="' + 0 + '" >wanttoread</option><option id= "' + json[i].isbn + '" value="' + 1 + '">reading</option><option id= "' + json[i].isbn + '" value="' + 2 + '" >read</option></select></div>'
+                output += '<div><img src= "' + json[i].image + '" ><select id= "' + json[i].isbn + '" class=\'bookselect\'><option>option</option><option   value="' + 0 + '" >wanttoread</option><option  value="' + 1 + '">reading</option><option  value="' + 2 + '" >read</option></select></div>'
               
            
             });
             $('#book').append(output);
-            let id = post;
+            
             $(document).ready(function () {
-                $(id).on("onchange",function() {
-                    //console.log('option:selected').attr("id")
-                    //alert($(this).data('id'));
-                    alert("hii");
+                $('.bookselect').on('change',function(event){
+                    console.log(event.target.value)
+                    var isbn=event.target.id;
+                    console.log(event.target.id)
+                    if(event.target.value==0)
+                    {
+                        
+                       postwantToRead(isbn,"wantToRead");  
+                    }
+                    if(event.target.value==1)
+                    {
+                       postwantToRead(isbn,"reading");  
+                    }
+                    if(event.target.value==2)
+                    {
+                       postwantToRead(isbn,"read");  
+                    }
+                   
                 })
-                
+               
+                 
             })
             
             
            
         }).catch(error => console.error(error))
+        
+}
+function postwantToRead(isbn,listType) {
+    //console.log(isbn+" "+listType);
+    
+   var url = `http://localhost:7777/userbooks/list/${listType}`;
+    console.log(url);
+
+    var request = new Request(url, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "username":username
+        },
+        body: JSON.stringify({
+            "isbn":isbn
+        }),
+        method: 'POST',
+    })
+   // console.log(username);
+    fetch(request)
+        .then(res => console.log(res))
+        // .then(json => {
+        //     //json=json[0];
+        //      console.log(JSON.stringify(json));
+            
+            
+           
+        .catch(error => console.error(error))
         
 }
 
@@ -67,13 +112,58 @@ function wantToRead(username) {
                     
                     if (json[isbn] == booksJsonObject[book].isbn){
                         //console.log()
-                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><select><option >wanttoread</option><option >reading</option><option >read</option></select></div>'
+                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><button id="' + booksJsonObject[book].isbn + '" class=\"deletebook\">DELETE</button></div>'
                 }};
             };
             $('#wantToRead').append(output);
+            $(document).ready(function () {
+                $('.deletebook').on('click',function(event){
+                 
+                    var isbn=event.target.id;
+                    //console.log(event.target.id)
+                    deletebookFromTheSection(isbn,username,'wantToRead',1)
+                   
+                })
+            })
+               
 
 
         }).catch(error => console.error(error))
+}
+
+
+//DELETE BOOK FROM THE SECTION
+function deletebookFromTheSection(isbn,username,listType,value){
+   var url = `http://localhost:7777/userbooks/list/${listType}`;
+    var output = "";
+    var request = new Request(url, {
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "username": username
+        },
+        body: JSON.stringify({
+            "isbn":isbn
+        }),
+        method: 'DELETE',
+    })
+    fetch(request)
+        .then(res => res.json())
+        .then(json => {
+            $(`#${listType}`).empty();
+           if(value==1)
+            wantToRead(username);
+            if(value==2)
+            reading(username);
+            if(value==3) 
+            read(username);
+            
+            
+            
+            
+
+        }).catch(error => console.error(error))
+
 }
 function reading(username) {
     var url = 'http://localhost:7777/userbooks/list/reading';
@@ -98,10 +188,19 @@ function reading(username) {
                     
                     if (json[isbn] == booksJsonObject[book].isbn){
                         //console.log()
-                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><select><option >wanttoread</option><option >reading</option><option >read</option></select></div>'
+                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><button id="' + booksJsonObject[book].isbn + '" class=\"deletebook\">DELETE</button></div>'
                 }};
             };
             $('#reading').append(output);
+            $(document).ready(function () {
+                $('.deletebook').on('click',function(event){
+                 
+                    var isbn=event.target.id;
+                    //console.log(event.target.id)
+                    deletebookFromTheSection(isbn,username,'reading',2)
+                   
+                })
+            })
 
 
         }).catch(error => console.error(error))
@@ -129,10 +228,19 @@ function read(username) {
                     
                     if (json[isbn] == booksJsonObject[book].isbn){
                         //console.log()
-                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><select><option >wanttoread</option><option >reading</option><option >read</option></select></div>'
+                        output += '<div><img src= "' + booksJsonObject[book].image + '" ><button id="' + booksJsonObject[book].isbn + '" class=\"deletebook\">DELETE</button></div>'
                 }};
             };
             $('#read').append(output);
+            $(document).ready(function () {
+                $('.deletebook').on('click',function(event){
+                 
+                    var isbn=event.target.id;
+                    //console.log(event.target.id)
+                    deletebookFromTheSection(isbn,username,'read',3)
+                   
+                })
+            })
 
 
         }).catch(error => console.error(error))
@@ -143,8 +251,9 @@ function read(username) {
 
 
 function userLogin() {
-    var userName = document.getElementById('loginid1').value;
     
+    var userName = document.getElementById('loginid1').value;
+    username=userName;
 
     var url = 'http://localhost:7777/api/login';
 

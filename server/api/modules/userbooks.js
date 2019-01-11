@@ -104,6 +104,7 @@ router.post('/list/:listType', (req, res) => {
     var listType = req.params.listType;
     var username = req.headers.username;
     var isbn = req.body.isbn;
+    console.log("hello WOlrd");
     validStringOrNot(isbn)
         .then(books => {
             return validBookOrNot(books)
@@ -136,7 +137,7 @@ router.delete("/list/:listType", (req, res) => {
             return deleteBooks(listType, username, isbn)
         })
         .then(result => {
-            res.send(`${result} is deleted in the list`);
+            res.send(JSON.stringify("BOOK DELETED") );
 
         })
         .catch(err => console.log(err));
