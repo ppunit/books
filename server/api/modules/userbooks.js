@@ -116,7 +116,7 @@ router.post('/list/:listType', (req, res) => {
         })
         .then(result => {
             console.log(result);
-            res.send(`${result} is added in the list`);
+            res.send("200");
 
         })
         .catch(err => res.send(err));
