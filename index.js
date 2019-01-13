@@ -3,8 +3,27 @@ var booksJsonObject = "";
 //to store the user name
 var username = "";
 //to display the books in the book section
-function getbooks() {
-    var url = 'http://localhost:7777/books/api/bookstore';
+
+
+    $(document).ready(function(){
+        $('#fixedcontainer').hide();
+        
+        $('#search').keyup(function(event){
+            var booktitle=document.getElementById('search').value;
+            console.log(booktitle);
+            getbooks(booktitle);
+            
+            
+
+        })
+    })
+
+function getbooks(title) {
+    console.log(title);
+    
+      
+   
+    var url = 'http://localhost:7777/books/api/bookstore?search='+title;
 
     var request = new Request(url, {
         headers: {
@@ -12,6 +31,7 @@ function getbooks() {
             "Accept": "application/json",
 
         },
+        
         method: 'GET',
     })
     fetch(request)
@@ -39,17 +59,17 @@ function getbooks() {
                     if (event.target.value == 0) {
 
                         postwantToRead(isbn, "wantToRead");
-                        
+
 
                     }
                     if (event.target.value == 1) {
                         postwantToRead(isbn, "reading");
-                       
+
                         getUserData(username, "reading")
                     }
                     if (event.target.value == 2) {
                         postwantToRead(isbn, "read");
-                        
+
                         getUserData(username, "read")
 
                     }
@@ -64,9 +84,10 @@ function getbooks() {
         }).catch(error => console.error(error))
 
 }
+
 function handler() {
-    return new Promise((resolve,reject)=>function() {
-        
+    return new Promise((resolve, reject) => function () {
+
     })
 }
 //to get the book id from book section and posting to the particular user section
@@ -90,14 +111,14 @@ function postwantToRead(isbn, listType) {
     // console.log(username);
     fetch(request)
         .then(res => res.json())
-        
+
         .then(json => {
-            if(json==200)
-            getUserData(username,`${listType}`)
+            if (json == 200)
+                getUserData(username, `${listType}`)
         })
 
-        
-        
+
+
 
         .catch(error => console.error(error))
 
@@ -136,10 +157,10 @@ function getUserData(username, listType) {
             $(document).ready(function () {
                 $('.deletebook').on('click', function (event) {
                     var isbn = event.target.id;
-                    
+
                     deletebookFromTheSection(isbn, username, listType)
                     //console.log(event.target.id)
-                    
+
 
                 })
             })
@@ -152,8 +173,8 @@ function getUserData(username, listType) {
 
 //DELETE BOOK FROM THE PARTICULAR USER SECTION
 function deletebookFromTheSection(isbn, username, listType) {
-  
-                    
+
+
     var url = `http://localhost:7777/userbooks/list/${listType}`;
     var request = new Request(url, {
         headers: {
@@ -172,7 +193,7 @@ function deletebookFromTheSection(isbn, username, listType) {
             $(`#${listType}`).empty();
             if (listType === "wantToRead")
                 getUserData(username, "wantToRead");
-             if (listType === "reading")
+            if (listType === "reading")
                 getUserData(username, "reading");
             if (listType === "read")
                 getUserData(username, "read");
@@ -199,12 +220,22 @@ function userLogin() {
         .then(res => res.json())
         .then(json => {
             console.log(json)
-
-
-            getbooks()
+           if(json=="200")
+           {
+            $('#fixedcontainer').show();
+            getbooks("");
+            // searchbook();
             getUserData(userName, "wantToRead");
             getUserData(userName, "reading");
             getUserData(userName, "read");
+           }
+           else
+          {
+            {
+                $('#id01').css({'display':'none'});
+                $('#id04').css({'display':'block'});
+            }
+          }
 
         })
         .catch(error => console.error(error))
@@ -214,7 +245,7 @@ function userLogin() {
 //USER REGISTRATION PART IF IT IS PRESENT IT SHOWS EROR ELSE IT WILL UPDATE THE DATABASE
 function userRegister() {
     var userName = document.getElementById('loginid2').value;
-    alert(userName);
+    
 
     var url = 'http://localhost:7777/user-register/api/register';
 
@@ -228,6 +259,13 @@ function userRegister() {
     })
     fetch(request)
         .then(res => res.json())
-        .then(json => console.log(json))
+        .then(json => {console.log(json)
+            if(json=="409")
+            {
+                $('#id02').css({'display':'none'});
+                $('#id03').css({'display':'block'});
+            }
+            
+        })
         .catch(error => console.error(error))
 }

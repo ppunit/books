@@ -13,6 +13,7 @@ const app = db.app;
 const books = require("./api/modules/books")
 const userRegister = require("./api/modules/auth")
 const userapi = require("./api/modules/userbooks")
+const fuzzysearch =require("./api/modules/fuzzysearch")
 //required schema's
 const schema = require("./api/schema/bookschema")
 const user = require("./api/schema/userschema")
@@ -39,10 +40,11 @@ app.post("/api/login", (req, res) => {
             .then(result => {
                   if (result.length >= 1) {
                        
-                        res.send(JSON.stringify("user is present"));
-
+                        //res.send(JSON.stringify("user is present"));
+                   res.send("200");
                   } else {
-                        res.send(JSON.stringify("There is no user with this name"));
+                        res.send("404");
+                        //res.send(JSON.stringify("There is no user with this name"));
                   }
             }).catch(err => {
                   console.log(err);
@@ -52,3 +54,4 @@ app.post("/api/login", (req, res) => {
 app.use('/books', books);
 app.use('/user-register', userRegister);
 app.use('/userbooks', userapi);
+app.use('/booksearch',fuzzysearch);
