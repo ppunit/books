@@ -51,7 +51,6 @@ app.post("/api/login", (req, res) => {
             })
 
 })
-app.use('/books', books);
+app.use('/books', books);      
 app.use('/user-register', userRegister);
 app.use('/userbooks', userapi);
-app.use('/booksearch',fuzzysearch);

@@ -7,64 +7,69 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="./client/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="index.js"></script>
-    <script src="bookcontainer.js"></script>
+    <script src="./client/index.js"></script>
+   
     <script>
 
     </script>
 </head>
 
 <body>
-     
-    <div >
-        <header>BOOK STORE</header>
-        
+
+    <div>
+        <header>
+            BOOK STORE
+            <button class="logout-button" id="logout" onclick="logout()">Logout</button>
+        </header>
+
+
     </div>
-    
-    <div class="loginform">
-        <button onclick="document.getElementById('id01').style.display='block'">Login</button>
-        <button onclick="document.getElementById('id02').style.display='block'">Register</button>
-    </div>
 
-    
-        <div id="id01" class="modal">
-            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <div class="container modal-content animate">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" id="loginid1" required>
-                <button type="submit" onclick="userLogin()">Login</button>
 
-            </div>
 
-            
+
+    <div id="login-popup" class="modal">
+
+
+        <div class="container  modal-content animate">
+
+
+            <span onclick="document.getElementById('login-popup').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <label for="uname">Enter Username</b>
+                <p id="user-not-exist" display="none">user name does not exist</p>
+            </label>
+
+            <input type="text" placeholder="Enter Username" name="uname" id="loginid1" required>
+
+            <button type="submit" onclick="userLogin()">Login</button>
+            <p>If not register click here</p>
+            <button class="register-button" >Register</button>
 
         </div>
-       
-        <div id="id02" class="modal">
-            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-            <div class="container modal-content animate">
 
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" id="loginid2" required>
-                <button type="submit" onclick="userRegister()">Register</button>
 
-            </div>
+
+    </div>
+
+    <div id="register-popup" class="modal">
+
+        <div class="container  modal-content animate">
+            <span onclick="document.getElementById('register-popup').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+            <label for="uname"><b>Enter Username</b>
+                <p id="register-successful" display="none">Registration successful click on login</p>
+                <p id="register-unsuccessful" display="none">username existed try with other name</p>
+            </label>
+            <input type="text" placeholder="Enter Username" name="uname" id="loginid2" required>
+            <button type="submit" onclick="userRegister()">Register</button>
+
+            <button class="login-button" >LoginHere</button>
+
         </div>
-        <div id="id03" class="modal ">
-                <div class=" modal-contentpopup animate">
-                <h3>user existed you can login with this name</h3>
-                </div>
-    
-            </div>
-            <div id="id04" class="modal ">
-                    <div class=" modal-contentpopup animate">
-                    <h3>user does not exist</h3>
-                    </div>
-        
-                </div>
-    
+    </div>
+
 
     <div class="searchbar">
         <!-- <label for="search"><b>Search Book Here</b></label> -->
@@ -72,13 +77,13 @@
 
     </div>
     <div id="fixedcontainer">
-        <div id="bookContainer">
+        <div id="bookscontainer">
             <h3>Books Available</h3>
-            <div id="book">
+            <div id="books">
 
             </div>
         </div>
-        <div>
+        <div class="usersection">
             <h3>Want To Read</h3>
             <div id="wantToRead">
 
@@ -95,15 +100,6 @@
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-
 
     </div>
 

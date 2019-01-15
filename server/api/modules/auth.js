@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const joi = require('joi')
+
 const user = require("../schema/userschema")
 
 //user authorize api validation using joi
@@ -12,14 +13,14 @@ const user = require("../schema/userschema")
 //else we have to create a new user in database
 router.post("/api/register", (req, res) => {
 
-    var name = req.headers.username;
-    console.log(req.headers.username);
+    var name = req.body.username;
+    console.log(req.body.username);
     const scheme = joi.string().min(3).max(20).required()
 
     joi.validate(name, scheme, (err, result) => {
 
         if (err) {
-            res.send(new Error("not valid user"));
+            res.send("422");//not a valid user
         }
 
     })
@@ -43,7 +44,7 @@ router.post("/api/register", (req, res) => {
             }
 
         }).catch(err => {
-            res.send("cannot add the user");
+            res.send("404");//cannot add the user
         })
 })
 
