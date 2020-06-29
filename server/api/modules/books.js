@@ -9,7 +9,7 @@ router.get('/api/bookstore', (req, res) => {
            
             schema.find({
                         "title": regex
-                  }, function (err, books) {
+                  }).then( books=> {
                         
                         if(books.length>=1) {
                               res.send(books);
@@ -25,7 +25,7 @@ router.get('/api/bookstore', (req, res) => {
                         console.log(err);
                   })
 
-      } else {
+             } else {
             schema.find().then(books => {
                   res.json(books);
             }).catch((err) => {

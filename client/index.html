@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <title>BOOK STORE</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./index.js"></script>
+   
+    <script>
+
+    </script>
+</head>
+
+<body>
+
+    <div>
+        <header>
+            BOOK STORE
+            <button class="logout-button" id="logout" onclick="logout()">Logout</button>
+        </header>
+
+
+    </div>
+
+
+
+
+    <div id="login-popup" class="modal">
+
+
+        <div class="container  modal-content animate">
+
+
+            <span onclick="document.getElementById('login-popup').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <label for="uname">Enter Username</b>
+                <p id="user-not-exist" display="none">user name does not exist</p>
+            </label>
+
+            <input type="text" placeholder="Enter Username" name="uname" id="loginid1" required>
+
+            <button type="submit" onclick="userLogin()">Login</button>
+            <p>If not register click here</p>
+            <button class="register-button" >Register</button>
+
+        </div>
+
+
+
+    </div>
+
+    <div id="register-popup" class="modal">
+
+        <div class="container  modal-content animate">
+            <span onclick="document.getElementById('register-popup').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+            <label for="uname"><b>Enter Username</b>
+                <p id="register-successful" display="none">Registration successful click on login</p>
+                <p id="register-unsuccessful" display="none">username existed try with other name</p>
+                <p id="cannot-register" display="none">try another name</p>
+            </label>
+            <input type="text" placeholder="Enter Username" name="uname" id="loginid2" required>
+            <button type="submit" onclick="userRegister()">Register</button>
+
+            <button class="login-button" >LoginHere</button>
+
+        </div>
+    </div>
+
+
+    <div class="search-bar">
+        <!-- <label for="search"><b>Search Book Here</b></label> -->
+        <input id="search" type="text" placeholder="Enter book TITLE" name="search" required>
+
+    </div>
+    <div id="fixed-container">
+        <div id="books-container">
+            <h3>Books Available</h3>
+            <div id="books">
+
+            </div>
+        </div>
+        <div class="user-section">
+            <h3>Want To Read</h3>
+            <div id="wantToRead">
+
+
+            </div>
+            <h3>Reading</h3>
+            <div id="reading">
+
+
+            </div>
+            <h3>Read</h3>
+            <div id="read">
+
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

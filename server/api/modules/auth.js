@@ -38,13 +38,18 @@ router.post("/api/register", (req, res) => {
                     read: []
                 })
                 newuser.save(function (err, newuser) {
-                    if (err) return console.log(JSON.stringify("cannot add a user"))
+                    if (err) {
+                      return  new Error("404");
+
+                    }
+                    else
                     res.send('201');
                 })
             }
 
         }).catch(err => {
-            res.send("404");//cannot add the user
+            console.log(err);
+            res.send("404")//cannot add the user
         })
 })
 

@@ -10,6 +10,6 @@ const userSchema=mongoose.Schema({
     reading:[{type:String,index:true,required:true}],
     read:[{type:String,index:true,required:true}]
 
-}, { collection : 'userdata' })
+}, { collection : 'userdatas' })
 
 module.exports=mongoose.model("user",userSchema)
